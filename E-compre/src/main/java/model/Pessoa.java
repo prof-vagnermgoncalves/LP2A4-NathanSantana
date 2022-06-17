@@ -2,11 +2,21 @@ package model;
 
 import java.util.Date;
 
-public class Cliente {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
+public class Pessoa {
+	@Id
+	@GeneratedValue
 	private int id;
 	private String nome;
 	private String cpf;
 	private String sexo;
+	@Temporal(TemporalType.DATE)
 	private Date dataNasc;
 	private String telefone;
 	private String rua;
@@ -15,6 +25,7 @@ public class Cliente {
     private String estado;
     private String email;
     private String senha;
+    private String role;
     
     
 	public int getId() {
@@ -91,7 +102,7 @@ public class Cliente {
 	}
 	
 
-	public Cliente(int id, String nome, String cpf, String sexo, Date dataNasc, String telefone, String rua,
+	public Pessoa(int id, String nome, String cpf, String sexo, Date dataNasc, String telefone, String rua,
 			String bairro, String cidade, String estado, String email, String senha) {
 		super();
 		this.id = id;

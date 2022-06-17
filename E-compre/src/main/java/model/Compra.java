@@ -7,7 +7,7 @@ import java.util.List;
 public class Compra {
 	private int id;
 	private List<Produto> produtos = new ArrayList<Produto>();
-	private Cliente cliente;
+	private Pessoa pessoa;
 	private Date dataCompra;
 	public int getId() {
 		return id;
@@ -21,11 +21,11 @@ public class Compra {
 	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
 	}
-	public Cliente getCliente() {
-		return cliente;
+	public Pessoa getCliente() {
+		return pessoa;
 	}
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setCliente(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 	public Date getDataCompra() {
 		return dataCompra;
@@ -35,10 +35,10 @@ public class Compra {
 	}
 	
 	
-	public Compra(int id, List<Produto> produtos, Cliente cliente, Date dataCompra) {
+	public Compra(int id, List<Produto> produtos, Pessoa pessoa, Date dataCompra) {
 		this.id = id;
 		this.produtos = produtos;
-		this.cliente = cliente;
+		this.pessoa = pessoa;
 		this.dataCompra = dataCompra;
 	}
 	
