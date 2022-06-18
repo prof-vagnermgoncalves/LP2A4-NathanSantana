@@ -85,26 +85,27 @@ public class PessoaDAO extends FabricaConexao{
 		Pessoa resultado = null;
 		
 		try {
-			String stmt = "select nome, cpf, sexo, telefone, rua, bairro, cidade, estado, email, senha, pessoaRole from pessoas where id = ?";
+			String stmt = "select id, nome, cpf, sexo, telefone, rua, bairro, cidade, estado, email, senha, pessoaRole from pessoas where id = ?";
 			
 			PreparedStatement pStmt = super.abrirConexao().prepareStatement(stmt);
 			pStmt.setInt(1, id);
 			ResultSet rs = pStmt.executeQuery();
 			
 			while(rs.next()) {
-				Pessoa p = new Pessoa();
-				p.setId(rs.getInt("id"));
-				p.setNome(rs.getString("nome"));
-				p.setCpf(rs.getString("cpf"));
-				p.setSexo(rs.getString("sexo"));
-				p.setDataNasc(rs.getDate("dataNasc"));
-				p.setTelefone(rs.getString("telefone"));
-				p.setRua(rs.getString("rua"));
-				p.setBairro(rs.getString("bairro"));
-				p.setCidade(rs.getString("cidade"));
-				p.setEstado(rs.getString("estado"));
-				p.setEmail(rs.getString("email"));
+				resultado = new Pessoa();
+				resultado.setId(rs.getInt("id"));
+				resultado.setNome(rs.getString("nome"));
+				resultado.setCpf(rs.getString("cpf"));
+				resultado.setSexo(rs.getString("sexo"));
+				//p.setDataNasc(rs.getDate("dataNasc"));
+				resultado.setTelefone(rs.getString("telefone"));
+				resultado.setRua(rs.getString("rua"));
+				resultado.setBairro(rs.getString("bairro"));
+				resultado.setCidade(rs.getString("cidade"));
+				resultado.setEstado(rs.getString("estado"));
+				resultado.setEmail(rs.getString("email"));
 			}
+			System.out.println(resultado);
 			super.fecharConexao();
 		}catch (Exception e){
 			System.out.println("Erro ao retornar cadastro da pessoa com o ID: " + e.getMessage());

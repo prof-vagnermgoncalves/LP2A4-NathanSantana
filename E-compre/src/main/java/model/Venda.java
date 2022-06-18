@@ -18,10 +18,10 @@ public class Venda {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Pessoa getCliente() {
+	public Pessoa getPessoa() {
 		return pessoa;
 	}
-	public void setCliente(Pessoa pessoa) {
+	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
 	public List<Produto> getProdutos() {
