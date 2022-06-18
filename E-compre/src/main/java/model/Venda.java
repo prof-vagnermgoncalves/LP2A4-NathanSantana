@@ -10,6 +10,8 @@ public class Venda {
 	private List<Produto> produtos = new ArrayList<Produto>();
 	private double valorTotal;
 	private Date dataVenda = new Date();
+	
+	
 	public int getId() {
 		return id;
 	}

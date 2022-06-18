@@ -1,5 +1,6 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -25,7 +26,7 @@ public class Pessoa {
     private String estado;
     private String email;
     private String senha;
-    private String role;
+    private String pessoaRole;
     
     
 	public int getId() {
@@ -56,6 +57,7 @@ public class Pessoa {
 		return dataNasc;
 	}
 	public void setDataNasc(Date dataNasc) {
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		this.dataNasc = dataNasc;
 	}
 	public String getTelefone() {
@@ -100,10 +102,16 @@ public class Pessoa {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
 
+	public String getRole() {
+		return pessoaRole;
+	}
+	public void setRole(String role) {
+		this.pessoaRole = role;
+	}
+	
 	public Pessoa(int id, String nome, String cpf, String sexo, Date dataNasc, String telefone, String rua,
-			String bairro, String cidade, String estado, String email, String senha) {
+			String bairro, String cidade, String estado, String email, String senha, String role) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -117,9 +125,11 @@ public class Pessoa {
 		this.estado = estado;
 		this.email = email;
 		this.senha = senha;
+		this.pessoaRole = role;
 	}
 	
-	
-	
-	
+	public Pessoa() {
+		
+	}
+		
 }

@@ -9,6 +9,8 @@ public class Compra {
 	private List<Produto> produtos = new ArrayList<Produto>();
 	private Pessoa pessoa;
 	private Date dataCompra;
+	private long numeroNF;
+	
 	public int getId() {
 		return id;
 	}
@@ -35,6 +37,12 @@ public class Compra {
 	}
 	
 	
+	public long getNumeroNF() {
+		return numeroNF;
+	}
+	public void setNumeroNF(long numeroNF) {
+		this.numeroNF = numeroNF;
+	}
 	public Compra(int id, List<Produto> produtos, Pessoa pessoa, Date dataCompra) {
 		this.id = id;
 		this.produtos = produtos;
