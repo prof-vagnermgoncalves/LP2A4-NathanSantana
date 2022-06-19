@@ -116,7 +116,7 @@ public class ProdutoDAO extends FabricaConexao{
 			super.fecharConexao();
 			
 		}catch (Exception e) {
-			System.out.println("Não foi possível editar o produto com o Id: " + produto.getId() + ". " + e.getMessage());
+			System.out.println("Nï¿½o foi possï¿½vel editar o produto com o Id: " + produto.getId() + ". " + e.getMessage());
 		}
 		
 		return resultado;
@@ -136,6 +136,45 @@ public class ProdutoDAO extends FabricaConexao{
 			System.out.println("Erro ao remover o produto com o ID: " + id + ". " + e.getMessage());
 		}
 		
+		return resultado;
+	}
+	
+	public int atualizarQtdProduto(int idProduto, int qtdVenda) {
+		int qtdFinal = 0, qtdAtual = 0, resultado = 0;
+		try {
+			try {
+				String stmt="select qtd from produtos where id = ?";
+				PreparedStatement pStmt = super.abrirConexao().prepareStatement(stmt);
+				pStmt.setInt(1, idProduto);
+				
+				ResultSet rs = pStmt.executeQuery();
+				
+				if(rs.next()) {
+					qtdAtual = rs.getInt(1);
+				}
+				
+				super.fecharConexao();
+			}catch (Exception e){
+				System.out.println("Erro ao retornar a quantidade do produto");
+			}
+			
+			qtdFinal = qtdAtual - qtdVenda;
+			
+			try {
+				String stmt="update produtos set qtd = ? where id = ?";
+				PreparedStatement pStmt = super.abrirConexao().prepareStatement(stmt);
+				
+				pStmt.setInt(1, qtdFinal);
+				pStmt.setInt(2, idProduto);
+				
+				resultado = pStmt.executeUpdate();
+				super.fecharConexao();
+			} catch (Exception e) {
+				System.out.println("Erro ao atualizar a quantidade do produto");
+			}
+		}catch (Exception e){
+			System.out.println("Erro ao atualizar a quantidade do produto com o ID: " + idProduto + e.getMessage());
+		}
 		return resultado;
 	}
 	
