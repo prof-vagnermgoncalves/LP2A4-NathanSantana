@@ -13,7 +13,7 @@ CREATE TABLE pessoas (
     senha VARCHAR(20) NOT NULL,
     pessoaRole VARCHAR(5) NOT NULL,
     constraint pk_pessoas primary key(id)
-)
+);
 
 CREATE TABLE produtos(
 	id SERIAL,
@@ -23,4 +23,4 @@ CREATE TABLE produtos(
 	categoria VARCHAR(50) NOT NULL,
 	descricao VARCHAR(500),
 	constraint pk_produtos primary key(id)
-)
+);
