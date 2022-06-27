@@ -19,10 +19,11 @@ public class CompraDAO extends FabricaConexao{
 		
 		try {
 			for(Produto produto: compra.getProdutos()) {
-				String  stmt = "insert into compras (idProduto, numeroNF) VALUES ?,?";
+				String  stmt = "insert into compras (idProduto, numeroNF, quantidade) VALUES (?,?,?) returning idcompra";
 				PreparedStatement pStmt = super.abrirConexao().prepareStatement(stmt);
 				pStmt.setInt(1, produto.getId());
 				pStmt.setLong(2, compra.getNumeroNF());
+				pStmt.setInt(3, compra.getQuantidade());
 				
 				ResultSet rs = pStmt.executeQuery();
 				
@@ -31,15 +32,17 @@ public class CompraDAO extends FabricaConexao{
 					System.out.println("ID da compra registrada: " + id);
 				}
 				
+				int quantidadeFinal = produto.getQtd() + compra.getQuantidade();
 				stmt="update produtos set qtd = ? where id = ?";
-				pStmt.setInt(1, compra.getQuantidade());
+				pStmt.setInt(1, quantidadeFinal);
+				System.out.println(produto.getId());
 				pStmt.setInt(2, produto.getId());
 				
 				resultado = pStmt.executeUpdate();
-				super.fecharConexao();
 			}		
+				super.fecharConexao();
 		} catch (Exception e) {
-			System.out.println("Erro ao registrar nova venda " + e.getMessage());
+			System.out.println("Erro ao registrar nova compra " + e.getMessage());
 		}
 		
 		return id;
