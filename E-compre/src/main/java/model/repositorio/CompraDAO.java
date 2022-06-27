@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Compra;
 import model.Produto;
@@ -46,6 +48,37 @@ public class CompraDAO extends FabricaConexao{
 		}
 		
 		return id;
+	}
+	
+	public List<Compra> recuperarComprasEProdutos (){
+		List<Compra> compras = new ArrayList<Compra>();
+		
+		try {
+			String  stmt = "SELECT * FROM compras INNER JOIN produtos ON produtos.id = idcompra";
+			PreparedStatement pStmt = super.abrirConexao().prepareStatement(stmt);
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			while(rs.next()) {
+				Compra c = new Compra();
+				Produto p1 = new ProdutoDAO().recuperarProdutoPorId(rs.getInt("idproduto"));
+				
+				List<Produto> produtos= new ArrayList<Produto>();
+				produtos.add(p1);
+				
+				c.setId(rs.getInt("idcompra"));
+				c.setNumeroNF(rs.getLong("numeronf"));
+				c.setProdutos(produtos);
+				
+				compras.add(c);
+			}
+		} catch (Exception e) {
+			System.out.println("Erro ao buscar compras" + e.getMessage());
+		}
+		
+		return compras;
+		
+		
 	}
 	
 	
