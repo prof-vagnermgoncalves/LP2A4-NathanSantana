@@ -24,3 +24,12 @@ CREATE TABLE produtos(
 	descricao VARCHAR(500),
 	constraint pk_produtos primary key(id)
 );
+
+
+INSERT INTO pessoas(nome,cpf,sexo,datanasc,telefone,rua,bairro,cidade,estado,email,senha,pessoarole) VALUES ('Joao','79946583516','Masculino','20/07/2022','40914040','Rua pedro vicente','Armenia','São Paulo','SP','usuario@teste.com','senhaTesteUsuario','user');
+
+CREATE TABLE vendas(idPessoa integer NOT NULL, valorTotal double precision NOT NULL, dataVenda VARCHAR(10));
+
+CREATE TABLE compras(idCompra SERIAL, idProduto integer NOT NULL, numeroNF bigint NOT NULL, quantidade integer NOT NULL, primary key(idCompra), constraint fk_produtos FOREIGN KEY(idProduto) REFERENCES produtos(id));
+
+SELECT * FROM vendas INNER JOIN pessoas ON pessoas.id = idPessoa;
