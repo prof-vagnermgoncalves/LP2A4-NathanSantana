@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import model.Pessoa;
 
@@ -46,11 +47,12 @@ public class PessoaDAO extends FabricaConexao{
 		return id;
 	}
 	
-	public ArrayList<Pessoa> recuperarPessoas(){
-		ArrayList<Pessoa> resultado = null;
+
+	public Collection<Pessoa> recuperarPessoas(){
+		Collection<Pessoa> resultado = null;
 		
 		try {
-			String stmt = "select nome, cpf, sexo, telefone, rua, bairro, cidade, estado, email, senha, pessoapessoapessoapessoaRolefrom pessoas";
+			String stmt = "select id, nome,cpf,sexo,datanasc,telefone,rua,bairro,cidade,estado,email,senha,pessoarole from pessoas";
 			
 			PreparedStatement pStmt = super.abrirConexao().prepareStatement(stmt);
 			ResultSet rs = pStmt.executeQuery();
@@ -62,7 +64,7 @@ public class PessoaDAO extends FabricaConexao{
 				p.setNome(rs.getString("nome"));
 				p.setCpf(rs.getString("cpf"));
 				p.setSexo(rs.getString("sexo"));
-				p.setDataNasc(rs.getDate("dataNasc"));
+				//p.setDataNasc(rs.getDate("datanasc"));
 				p.setTelefone(rs.getString("telefone"));
 				p.setRua(rs.getString("rua"));
 				p.setBairro(rs.getString("bairro"));

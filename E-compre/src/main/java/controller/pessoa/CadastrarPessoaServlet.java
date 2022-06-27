@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class CadastrarPessoa
+ * Servlet implementation class CadastrarPessoaServlet
  */
 @WebServlet("/pessoa/cadastrar")
 public class CadastrarPessoaServlet extends HttpServlet {

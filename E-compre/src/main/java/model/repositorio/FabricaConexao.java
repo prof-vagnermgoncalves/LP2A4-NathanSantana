@@ -12,6 +12,7 @@ public class FabricaConexao {
 	public Connection abrirConexao() {
 		try {
 			if(this.conn == null) {
+				Class.forName("org.postgresql.Driver");
 				String url = "jdbc:postgresql://localhost/ecommercemvc";
 				
 				Properties props = new Properties();
