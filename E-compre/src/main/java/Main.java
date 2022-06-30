@@ -13,6 +13,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		Produto p1 = new ProdutoDAO().recuperarProdutoPorId(1);
 		
+		
 		System.out.println(p1.getId());
 		
 		CompraDAO c1 = new CompraDAO();
@@ -29,7 +30,7 @@ public class Main {
 		compra.setQuantidade(10);
 		
 		c1.registrarCompra(compra);
-		
+
 	}
 
 }

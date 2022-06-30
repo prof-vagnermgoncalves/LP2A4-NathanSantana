@@ -38,7 +38,7 @@ public class ListarPessoasServlet extends HttpServlet {
 		
 		request.setAttribute("pessoasCadastradas", pessoas);
 		request.setAttribute("tituloPagina", "Cadastro de usuários");
-		request.setAttribute("pathPagina", "./views/pessoa/listar.jsp");
+		request.setAttribute("pathPagina", "./listar.jsp");
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/template.jsp");
 		
