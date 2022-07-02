@@ -1,28 +1,29 @@
-package controller.pessoa;
+package controller.produto;
 
+import java.io.IOException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Pessoa;
-import model.repositorio.PessoaDAO;
 
-import java.io.IOException;
+import jakarta.servlet.RequestDispatcher;
+import model.Pessoa;
+import model.Produto;
+import model.repositorio.PessoaDAO;
+import model.repositorio.ProdutoDAO;
 
 /**
- * Servlet implementation class CadastrarPessoaServlet
+ * Servlet implementation class CadastrarProdutoServlet
  */
-@WebServlet({"/pessoa/cadastrar","/pessoa/cadastro","/admin/cadastrar"})
-public class CadastrarPessoaServlet extends HttpServlet {
+public class CadastrarProdutoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
-     * @see HttpServlet#HttpServlet()
+     * Default constructor. 
      */
-    public CadastrarPessoaServlet() {
-        super();
+    public CadastrarProdutoServlet() {
         // TODO Auto-generated constructor stub
     }
 
@@ -39,33 +40,27 @@ public class CadastrarPessoaServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Pessoa p = new Pessoa();
-		PessoaDAO pessoaDAO = new PessoaDAO();
+		Produto p = new Produto();
+		ProdutoDAO produtoDAO = new ProdutoDAO();
 		
-		p.setNome(request.getParameter("txtNome"));
-		p.setCpf(request.getParameter("numCpf"));
-		p.setCpf(request.getParameter("sexo"));
-		p.setCpf(request.getParameter("txtTelefone"));
-		p.setCpf(request.getParameter("txtRua"));
-		p.setCpf(request.getParameter("txtBairro"));
-		p.setCpf(request.getParameter("txtCidade"));
-		p.setCpf(request.getParameter("UF"));
-		p.setCpf(request.getParameter("txtEmail"));
-		p.setCpf(request.getParameter("txtSenha"));
+		String precoInformado = request.getParameter("preco");
+		String quantidadeInformada = request.getParameter("qtd");
+		
+		p.setNome(request.getParameter("nome"));
+		p.setPreco(Double.parseDouble(precoInformado));
+		p.setQtd(Integer.parseInt(quantidadeInformada));
+		p.setCategoria(request.getParameter("categoria"));
+		p.setDescricao(request.getParameter("descricao"));
 		
 		
-		pessoaDAO.criarPessoa(p);
+		produtoDAO.criarProduto(p);
 		
 		
-		request.setAttribute("tituloPagina", "Cadastrar Pessoa");
-		request.setAttribute("pathPagina", "/pessoa/cadastrar.jsp");
-		request.setAttribute("pessoa", p);
+		request.setAttribute("tituloPagina", "Cadastrar Produto");
+		request.setAttribute("pathPagina", "/produto/listar.jsp");
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/template.jsp");
 		rd.forward(request, response);
-		
-		
-		//doGet(request, response);
 	}
 
 }

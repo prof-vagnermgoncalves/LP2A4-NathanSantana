@@ -58,8 +58,8 @@ if(request.getAttribute("pathView") != null)
 		            <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-bs-toggle="dropdown" aria-expanded="false">Administrador</a>
 		            <ul class="dropdown-menu" aria-labelledby="dropdown05">
 		              <li><a class="dropdown-item" href="${pageContext.request.contextPath}/pessoa/listar">Ver pessoas</a></li>
-		              <li><a class="dropdown-item" href="#">Another action</a></li>
-		              <li><a class="dropdown-item" href="#">Something else here</a></li>
+		              <li><a class="dropdown-item" href="${pageContext.request.contextPath}/produto/listar">Ver produtos</a></li>
+		              <li><a class="dropdown-item" href="${pageContext.request.contextPath}/compra/listar">Ver compras</a></li>
 		            </ul>
 		          </li>
 		        </ul>
@@ -78,6 +78,7 @@ if(request.getAttribute("pathView") != null)
 
 
     <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/script.js"></script>
     <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
       
