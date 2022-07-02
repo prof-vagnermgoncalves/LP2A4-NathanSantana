@@ -54,7 +54,7 @@ public class EditarPessoaServlet extends HttpServlet {
 		request.setAttribute("pessoa", p);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/template.jsp");
-		rd.forward(request, response);
+		rd.forward(request, response);  
 		
 		
 		
