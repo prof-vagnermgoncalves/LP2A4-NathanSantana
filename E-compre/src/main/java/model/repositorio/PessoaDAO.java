@@ -14,7 +14,7 @@ public class PessoaDAO extends FabricaConexao{
 		int id = 0;
 		
 		try {
-			String stmt = "insert into pessoas (nome, cpf, sexo, dataNasc, telefone, rua, bairro, cidade, estado, email, senha, pessoaRole) values (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) returning id";
+			String stmt = "insert into pessoas (nome, cpf, sexo, datanasc, telefone, rua, bairro, cidade, estado, email, senha, pessoarole) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) returning id";
 			
 			PreparedStatement pStmt = super.abrirConexao().prepareStatement(stmt);
 			
@@ -30,18 +30,19 @@ public class PessoaDAO extends FabricaConexao{
 			pStmt.setString(10, pessoa.getEmail());
 			pStmt.setString(11, pessoa.getSenha());
 			pStmt.setString(12, pessoa.getRole());
-		
 			
 			ResultSet rs = pStmt.executeQuery();
 			
-			if(rs.next()) {
+			if(rs.next())
+			{
 				id = rs.getInt(1);
 			}
 			
 			super.fecharConexao();
 		}
-		catch (Exception e) {
-			System.out.println("Erro ao tentar cadastrar pessoa." + e.getMessage());
+		catch (Exception e)
+		{
+			System.out.println("Erro ao tentar cadastrar a pessoa." + e.getMessage());
 		}
 		
 		return id;
@@ -83,11 +84,12 @@ public class PessoaDAO extends FabricaConexao{
 		return resultado;
 	}
 	
-	public Pessoa recuperarPessoa(int id) {
+	public Pessoa recuperarPessoa(int id)
+	{
 		Pessoa resultado = null;
 		
 		try {
-			String stmt = "select id, nome, cpf, sexo, telefone, rua, bairro, cidade, estado, email, senha, pessoaRole from pessoas where id = ?";
+			String stmt = "select id, nome, cpf, sexo, datanasc, telefone, rua, bairro, cidade, estado, email, senha, pessoarole from pessoas where id = ?";
 			
 			PreparedStatement pStmt = super.abrirConexao().prepareStatement(stmt);
 			pStmt.setInt(1, id);
@@ -99,28 +101,34 @@ public class PessoaDAO extends FabricaConexao{
 				resultado.setNome(rs.getString("nome"));
 				resultado.setCpf(rs.getString("cpf"));
 				resultado.setSexo(rs.getString("sexo"));
-				//p.setDataNasc(rs.getDate("dataNasc"));
+				resultado.setDataNasc((java.util.Date) rs.getDate("datanasc"));
 				resultado.setTelefone(rs.getString("telefone"));
 				resultado.setRua(rs.getString("rua"));
 				resultado.setBairro(rs.getString("bairro"));
 				resultado.setCidade(rs.getString("cidade"));
 				resultado.setEstado(rs.getString("estado"));
 				resultado.setEmail(rs.getString("email"));
+				resultado.setSenha(rs.getString("senha"));
+				resultado.setRole(rs.getString("pessoarole"));
 			}
-			System.out.println(resultado);
-			super.fecharConexao();
-		}catch (Exception e){
-			System.out.println("Erro ao retornar cadastro da pessoa com o ID: " + e.getMessage());
 			
+			super.fecharConexao();
+			
+		}
+		catch (Exception e)
+		{
+			System.out.println("Erro ao retornar cadastro da pessoa com o ID: " + id + ". " + e.getMessage());
 		}
 		
 		return resultado;
 	}
 	
-	public int editarPessoa(Pessoa pessoa) {
+	public int editarPessoa(Pessoa pessoa)
+	{
 		int resultado = 0;
 		
-		try {
+		try
+		{
 			String stmt = "update pessoas set nome = ?, cpf = ?, sexo = ?, telefone = ?, rua = ?, bairro = ?, cidade = ?, estado = ?, email = ?, senha = ? where id = ?";
 			
 			PreparedStatement pStmt = super.abrirConexao().prepareStatement(stmt);
@@ -128,25 +136,26 @@ public class PessoaDAO extends FabricaConexao{
 			pStmt.setString(1, pessoa.getNome());
 			pStmt.setString(2, pessoa.getCpf());
 			pStmt.setString(3, pessoa.getSexo());
-			pStmt.setDate(4, (Date) pessoa.getDataNasc());
-			pStmt.setString(5, pessoa.getTelefone());
-			pStmt.setString(6, pessoa.getRua());
-			pStmt.setString(7, pessoa.getBairro());
-			pStmt.setString(8, pessoa.getCidade());
-			pStmt.setString(9, pessoa.getEstado());
-			pStmt.setString(10, pessoa.getEmail());
-			pStmt.setString(11, pessoa.getSenha());
+			//Data de nascimento?
+			pStmt.setString(4, pessoa.getTelefone());
+			pStmt.setString(5, pessoa.getRua());
+			pStmt.setString(6, pessoa.getBairro());
+			pStmt.setString(7, pessoa.getCidade());
+			pStmt.setString(8, pessoa.getEstado());
+			pStmt.setString(9, pessoa.getEmail());
+			pStmt.setString(10, pessoa.getSenha());
+			pStmt.setInt(11, pessoa.getId());
 			
 			resultado = pStmt.executeUpdate();
 			
 			super.fecharConexao();
-		}catch (Exception e) {
-			System.out.println("Erro ao editar a pessoa " + e.getMessage());
+		}
+		catch (Exception e)
+		{
+			System.out.println("Erro ao editar a pessoa. " + e.getMessage());
 		}
 		
 		return resultado;
-		
-		
 	}
 	
 	public int removerPessoa(int id) {

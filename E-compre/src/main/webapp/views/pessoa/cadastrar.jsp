@@ -1,5 +1,3 @@
-<jsp:include page="../../template.jsp"/>
-
 <form method="POST"
 	  action="${pageContext.request.contextPath}/pessoa/cadastrar">
 	
